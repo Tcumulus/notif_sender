@@ -8,7 +8,8 @@ export default function App(props) {
   const [color, onChangeColor] = React.useState("")
   const [opacity, onOpacityChange] = React.useState([0.4,0.4,0.4])
 
-  const utc = 2
+  const d = new Date()
+  const utc = -d.getTimezoneOffset()/60
 
   const onNowButtonPress = (dtime) => {
     let time = new Date()
