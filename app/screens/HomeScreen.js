@@ -1,4 +1,4 @@
-// cd Documents\Projects\React-Native\DoneWithIt
+// cd Documents\Projects\React-Native\notif_sender
 
 import React from 'react';
 import {View, StyleSheet, Text, Pressable, StatusBar, Image} from "react-native";
@@ -6,9 +6,7 @@ import BlockElements from './BlockElements';
 
 export default function HomeScreen(props) {
   const [state, onChangeState] = React.useState({
-    blocks: [
-      {title: "Eten", time: "2021-10-23T20:20:00Z", color: "#6d9998"},
-    ]
+    blocks: []
   });
   const [lastTitleParam, onChangeLastTitleParam] = React.useState("")
   const [lastTimeParam, onChangeLastTimeParam] = React.useState("")
