@@ -1,19 +1,22 @@
 import React from 'react';
-import {View, Text, StyleSheet} from "react-native";
+import { StyleSheet } from "react-native";
 import { ScrollView } from 'react-native-gesture-handler';
 import BlockElement from './BlockElement';
+import readFirestore from '../firebase/readFirestore'
 
 function BlockElements(props) {
+  const blocks = readFirestore("blocks")
+
   return (
     <ScrollView style={[styles.container]}>
-      {props.blocks.map((block, id) => 
-        <BlockElement
-          key = {id}
-          block = {block}
-          navigateTo = {props.navigateTo}
-        />
-      )}
-    </ScrollView>
+        {blocks && blocks.map(block => 
+          <BlockElement
+            key = {block.id}
+            block = {block}
+            navigateTo = {props.navigateTo}
+          />
+        )}
+      </ScrollView>
   );
 }
 

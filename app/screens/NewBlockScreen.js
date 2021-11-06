@@ -1,15 +1,23 @@
-import React from 'react';
-import { StyleSheet, Text, View, TextInput, Pressable, Image } from 'react-native';
+import React, {useState} from 'react'
+import { StyleSheet, Text, View, TextInput, Pressable, Image } from 'react-native'
+import Load from './Load'
 
-export default function App(props) {
-  const [title, onChangeTitle] = React.useState("")
-  const [hours, onChangeHours] = React.useState(0)
-  const [minutes, onChangeMinutes] = React.useState(0)
-  const [color, onChangeColor] = React.useState("")
-  const [opacity, onOpacityChange] = React.useState([0.4,0.4,0.4])
+const NewBlockScreen = (props) => {
+  const [title, onChangeTitle] = useState("")
+  const [hours, onChangeHours] = useState(0)
+  const [minutes, onChangeMinutes] = useState(0)
+  const [time, setTime] = useState(null)
+  const [color, onChangeColor] = useState("")
+  const [opacity, onOpacityChange] = useState([0.4,0.4,0.4])
+  const [press, setPress] = useState(null)
 
   const d = new Date()
   const utc = -d.getTimezoneOffset()/60
+
+  const toHome = () => {
+    setPress(null)
+    props.navigation.navigate("Home")
+  }
 
   const onNowButtonPress = (dtime) => {
     let time = new Date()
@@ -31,7 +39,7 @@ export default function App(props) {
   }
 
   const onSubmit = () => {
-    if (title == "" || hours == 0 && minutes == 0 || color == "") {
+    if (title == "" || hours == 0 && minutes == 0) { // || color == "") {
       alert("info not complete")
     }
     else if (hours < 0 || minutes < 0 || hours > 23 || minutes > 59) {
@@ -41,8 +49,9 @@ export default function App(props) {
       let today = new Date()
       let time = today.getFullYear() + "-" + ((today.getMonth()+1) < 10?'0':'') + (today.getMonth()+1) + "-" 
         + (today.getDate() < 10?'0':'') + today.getDate() + "T" + ((hours-utc)< 10?'0':'') + (hours-utc) + ":"
-        + (minutes < 10?'0':'') + minutes + ":00Z"
-      props.navigation.navigate("Home", {title: title, time: time, color: color})
+        + (minutes < 10?'0':'') + minutes + ":00Z";
+      setTime(time)
+      setPress(true)
     }
   }
 
@@ -93,12 +102,16 @@ export default function App(props) {
           onPress={() => changeOpacity(2)}
         />
       </View>
-      <Pressable style={[styles.doneButton]} onPress={() => onSubmit()}>
+      <Pressable style={[styles.doneButton]} onPress={onSubmit}>
         <Image style={styles.doneLogo} source={require("../assets/check-mark.png")}></Image>
       </Pressable>
+
+      {press && <Load title={title} time={time} color={color} toHome={() => toHome()}/>}
     </View>
   );
 }
+
+export default NewBlockScreen
 
 const styles = StyleSheet.create({
   container: {
