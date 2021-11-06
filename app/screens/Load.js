@@ -1,4 +1,3 @@
-import React from "react"
 import writeFirestore from "../firebase/writeFirestore"
 
 const Load = ({ title, time, color, toHome }) => {

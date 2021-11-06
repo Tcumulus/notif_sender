@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, TextInput, Pressable, Image } from 'react-native'
 import Load from './Load'
 
@@ -15,7 +15,9 @@ const NewBlockScreen = (props) => {
   const utc = -d.getTimezoneOffset()/60
 
   const toHome = () => {
-    setPress(null)
+    useEffect(() => {
+      setPress(null)
+    }, [setPress])
     props.navigation.navigate("Home")
   }
 
@@ -106,7 +108,7 @@ const NewBlockScreen = (props) => {
         <Image style={styles.doneLogo} source={require("../assets/check-mark.png")}></Image>
       </Pressable>
 
-      {press && <Load title={title} time={time} color={color} toHome={() => toHome()}/>}
+      {press && <Load title={title} time={time} color={color} toHome={toHome}/>}
     </View>
   );
 }
