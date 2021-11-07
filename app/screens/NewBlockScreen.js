@@ -7,6 +7,7 @@ const NewBlockScreen = (props) => {
   const [hours, onChangeHours] = useState(0)
   const [minutes, onChangeMinutes] = useState(0)
   const [time, setTime] = useState(null)
+  const [msTime, setMsTime] = useState(0)
   const [color, onChangeColor] = useState("")
   const [opacity, onOpacityChange] = useState([0.4,0.4,0.4])
   const [press, setPress] = useState(null)
@@ -22,11 +23,13 @@ const NewBlockScreen = (props) => {
   }
 
   const onNowButtonPress = (dtime) => {
-    let time = new Date()
+    let time = msTime == 0 ? new Date() : new Date(msTime)
+    time = dtime == 0 ? new Date() : time
     let ms = time.getTime() + 60000*dtime
     time = new Date(ms)
     onChangeHours(time.getHours())
     onChangeMinutes(time.getMinutes())
+    setMsTime(ms)
   }
 
   const changeOpacity = (id) => {
@@ -41,7 +44,7 @@ const NewBlockScreen = (props) => {
   }
 
   const onSubmit = () => {
-    if (title == "" || hours == 0 && minutes == 0) { // || color == "") {
+    if (title == "" || hours == 0 && minutes == 0 || color == "") {
       alert("info not complete")
     }
     else if (hours < 0 || minutes < 0 || hours > 23 || minutes > 59) {
@@ -85,8 +88,8 @@ const NewBlockScreen = (props) => {
         <Pressable style={styles.buttonNowView} onPress={() => onNowButtonPress(5)}>
           <Text style={styles.buttonText}>+5 min</Text>
         </Pressable>
-        <Pressable style={styles.buttonNowView} onPress={() => onNowButtonPress(10)}>
-          <Text style={styles.buttonText}>+10 min</Text>
+        <Pressable style={styles.buttonNowView} onPress={() => onNowButtonPress(30)}>
+          <Text style={styles.buttonText}>+30 min</Text>
         </Pressable>
       </View>
 
