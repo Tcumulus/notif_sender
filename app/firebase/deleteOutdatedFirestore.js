@@ -7,7 +7,7 @@ const deleteOutdatedFirestore = () => {
 
   useEffect(() => {
     blocks.forEach(block => {
-      if (new Date(block.time) < new Date() - 60000*30) {
+      if (new Date(block.time.seconds*1000) < new Date() - 60000*30) {
         const docRef = projectFirestore.collection("blocks").doc(block.id)
         docRef.delete()
       }
