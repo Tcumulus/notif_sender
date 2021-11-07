@@ -1,5 +1,3 @@
-// cd Documents\Projects\React-Native\notif_sender
-
 import React from 'react'
 import {View, StyleSheet, Text, Pressable, StatusBar, Image} from "react-native"
 import BlockElements from './BlockElements'

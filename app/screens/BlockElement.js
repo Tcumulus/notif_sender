@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from "react-native";
+import React from 'react'
+import {View, StyleSheet, Text, TouchableOpacity} from "react-native"
 
 function BlockElement(props) {
   const block = props.block.block
