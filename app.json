@@ -27,7 +27,7 @@
       "package": "notif_sender.apk"
     },
     "web": {
-      "favicon": "./app/assets/alarm.png"
+      "favicon": "./app/assets/favicon.png"
     }
   }
 }
