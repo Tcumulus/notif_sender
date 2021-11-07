@@ -41,14 +41,15 @@ const NewBlockScreen = (props) => {
   }
 
   const onSubmit = () => {
-    if (title == "" || hours == 0 && minutes == 0) { // || color == "") {
+    if (title == "" || hours == 0 && minutes == 0) {// || color == "") {
       alert("info not complete")
     }
     else if (hours < 0 || minutes < 0 || hours > 23 || minutes > 59) {
       alert("invalid time")
     }
     else {
-      let time = new Date(msTime)
+      let today = new Date()
+      let time = new Date(today.getFullYear(), today.getMonth(), today.getDate(), hours, minutes, 0, 0)
       setTime(time)
       setPress(true)
     }
