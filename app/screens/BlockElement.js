@@ -12,7 +12,7 @@ function BlockElement(props) {
   return (
     <TouchableOpacity 
       style={[styles.container, {backgroundColor: block.color}]} 
-      onPress={() => props.navigateTo.navigate("Detail", block)}
+      onPress={() => props.navigateTo.navigate("Detail", props.block)}
     >
       <View style={styles.textBlock}>
         <Text style={[styles.text, {fontSize: 25, fontWeight: "bold"}]}>{block.title}</Text>

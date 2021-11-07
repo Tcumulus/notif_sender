@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, TextInput, Pressable, Image } from 'react-native'
-import Load from './Load'
+import writeFirestore from "../firebase/writeFirestore"
 
 const NewBlockScreen = (props) => {
   const [title, onChangeTitle] = useState("")
@@ -108,12 +108,17 @@ const NewBlockScreen = (props) => {
         <Image style={styles.doneLogo} source={require("../assets/check-mark.png")}></Image>
       </Pressable>
 
-      {press && <Load title={title} time={time} color={color} toHome={toHome}/>}
+      {press && <Write title={title} time={time} color={color} toHome={toHome}/>}
     </View>
   );
 }
-
 export default NewBlockScreen
+
+const Write = ({ title, time, color, toHome }) => {
+  writeFirestore({title, time, color})
+  toHome()
+  return null
+}
 
 const styles = StyleSheet.create({
   container: {
