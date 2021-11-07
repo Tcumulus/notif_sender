@@ -6,6 +6,7 @@ const readFirestore = (collection) => {
 
   useEffect(() => {
     const unsub = projectFirestore.collection(collection)
+      .orderBy("time")
       .onSnapshot((snap) => {
         let documents = []
         snap.forEach(doc => {

@@ -2,10 +2,10 @@ import React from 'react'
 import {View, StyleSheet, Text, TouchableOpacity} from "react-native"
 
 function BlockElement(props) {
-  const block = props.block.block
+  const block = props.block
 
   const readTime = () => {
-    let rtime = new Date(block.time)
+    let rtime = new Date(block.time.seconds * 1000) // to ms
     return rtime.getHours()+":"+(rtime.getMinutes() < 10?'0':'')+rtime.getMinutes()
   }
 

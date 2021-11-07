@@ -4,11 +4,13 @@ import deleteFirestore from '../firebase/deleteFirestore'
 
 export default function App(props) {
   const [press, setPress] = useState(null)
-  const block = props.navigation.getParam("block")
+  const title = props.navigation.getParam("title")
+  const time = props.navigation.getParam("time")
+  const color = props.navigation.getParam("color")
   const id = props.navigation.getParam("id")
 
   const timeTo = () => {
-    let rtime = new Date(block.time)
+    let rtime = new Date(time.seconds * 1000)
     let dtime = rtime - new Date()
     let atime = Math.abs(dtime)
 
@@ -22,7 +24,7 @@ export default function App(props) {
   }
 
   const readTime = () => {
-    let rtime = new Date( block.time )
+    let rtime = new Date(time.seconds * 1000)
     return rtime.getHours()+":"+(rtime.getMinutes() < 10?'0':'')+rtime.getMinutes()
   }
   
@@ -35,8 +37,8 @@ export default function App(props) {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.titleContainer, { backgroundColor: block.color } ]}>
-        <Text style={styles.titleText}>{ block.title} </Text>
+      <View style={[styles.titleContainer, { backgroundColor: color } ]}>
+        <Text style={styles.titleText}>{title} </Text>
       </View>
       <View style={styles.timeContainer}>
         <Text style={[styles.timeText, { fontWeight: "bold", fontSize: 25 }]}>{ timeTo() }</Text>

@@ -12,9 +12,6 @@ const NewBlockScreen = (props) => {
   const [opacity, onOpacityChange] = useState([0.4,0.4,0.4])
   const [press, setPress] = useState(null)
 
-  const d = new Date()
-  const utc = -d.getTimezoneOffset()/60
-
   const toHome = () => {
     useEffect(() => {
       setPress(null)
@@ -44,17 +41,14 @@ const NewBlockScreen = (props) => {
   }
 
   const onSubmit = () => {
-    if (title == "" || hours == 0 && minutes == 0 || color == "") {
+    if (title == "" || hours == 0 && minutes == 0) { // || color == "") {
       alert("info not complete")
     }
     else if (hours < 0 || minutes < 0 || hours > 23 || minutes > 59) {
       alert("invalid time")
     }
     else {
-      let today = new Date()
-      let time = today.getFullYear() + "-" + ((today.getMonth()+1) < 10?'0':'') + (today.getMonth()+1) + "-" 
-        + (today.getDate() < 10?'0':'') + today.getDate() + "T" + ((hours-utc)< 10?'0':'') + (hours-utc) + ":"
-        + (minutes < 10?'0':'') + minutes + ":00Z";
+      let time = new Date(msTime)
       setTime(time)
       setPress(true)
     }
@@ -118,7 +112,7 @@ const NewBlockScreen = (props) => {
 export default NewBlockScreen
 
 const Write = ({ title, time, color, toHome }) => {
-  writeFirestore({title, time, color})
+  writeFirestore(title, time, color)
   toHome()
   return null
 }
