@@ -41,7 +41,7 @@ const NewBlockScreen = (props) => {
   }
 
   const onSubmit = () => {
-    if (title == "" || hours == 0 && minutes == 0) {// || color == "") {
+    if (title == "" || hours == 0 && minutes == 0 || color == "") {
       alert("info not complete")
     }
     else if (hours < 0 || minutes < 0 || hours > 23 || minutes > 59) {
